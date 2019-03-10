@@ -1,7 +1,6 @@
 import com.jhlabs.image.WaterFilter;
 import com.octo.captcha.component.image.backgroundgenerator.BackgroundGenerator;
 import com.octo.captcha.component.image.backgroundgenerator.FunkyBackgroundGenerator;
-import com.octo.captcha.component.image.backgroundgenerator.GradientBackgroundGenerator;
 import com.octo.captcha.component.image.color.RandomRangeColorGenerator;
 import com.octo.captcha.component.image.deformation.ImageDeformation;
 import com.octo.captcha.component.image.deformation.ImageDeformationByFilters;
@@ -29,8 +28,7 @@ import java.awt.image.ImageFilter;
  * @email spartajet.guo@gmail.com
  */
 public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
-    private static final String CODE = "草百有嶙";
-    // I、0去掉"一二三四五六七字符显示的个数"
+    private static final String CODE = "五丈花桥寻虽十文结万荒堂玉窗呜未年从顾雀扉国奇嶙京有军亡鸣生乌百死报入工草立黄士一刀相夜谢巷燕夕家晓期意用顽时阳斜雪空丹穿.上野前山汉装尽交白人力虫耻边提出岂天衣华能位峋夹南尔姓旧来滨子王史户错功中共光常无归气口夫三飞芒片朱千金名秦册楚呼大独到心八";
     // 字符显示的个数
     private static final Integer MIN_WORD_LEN = 4;
     // 字符显示的个数
@@ -45,12 +43,11 @@ public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
     @Override
     protected void buildInitialFactories() {
         WordGenerator wordGenerator = new RandomWordGenerator(CODE);
-        BackgroundGenerator backgroundGenerator = new GradientBackgroundGenerator(
-                IMAGE_WIDTH, IMAGE_HEIGHT, Color.white, Color.white);
+        BackgroundGenerator backgroundGenerator;
 // 字体格式
         Font[] fontsList;
 //        fontsList = new Font[]{Font.decode("STSongti-SC-Light")};
-        fontsList = new Font[]{new Font("STSongti-SC-Light",Font.PLAIN,1)};
+        fontsList = new Font[]{new Font("STSong",Font.PLAIN,1)};
         //可以使用中文验证码，另外汉字宽度比较大，要重新调整一下字体大小,不然会出现异常
 // 字体随机生成
         FontGenerator fontGenerator = new RandomFontGenerator(MIN_FONT_SIZE, MAX_FONT_SIZE, fontsList);
@@ -66,10 +63,8 @@ public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
         BaffleTextDecorator baffleTextDecorator = new BaffleTextDecorator(2, cgen);
         //曲线干扰
         LineTextDecorator lineTextDecorator = new LineTextDecorator(1, new RandomRangeColorGenerator(new int[]{0, 0}, new int[]{0, 0}, new int[]{0, 0}));
-        TextDecorator[] textDecorators = new TextDecorator[0];
-//textDecorators[0] = baffleTextDecorator;
-//textDecorators[0] = lineTextDecorator;
         TextPaster textPaster = new DecoratedRandomTextPaster(MIN_WORD_LEN, MAX_WORD_LEN, new RandomRangeColorGenerator(new int[]{0, 0}, new int[]{0, 0}, new int[]{0, 0}), true, new TextDecorator[]{baffleTextDecorator, lineTextDecorator});
+
 
 
 //过滤器
