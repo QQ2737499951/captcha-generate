@@ -22,7 +22,7 @@ public class Main {
         Field responseFld = clazz.getDeclaredField("response");
         //取消java语言访问检查以访问private变量
         responseFld.setAccessible(true);
-        for (int i = 0; i < 50000; i++) {
+        for (int i = 0; i <1500000; i++) {
             ImageCaptcha imageCaptcha = imageCodeEngine.getNextImageCaptcha();
             String response = responseFld.get(imageCaptcha).toString();
             BufferedImage bufferedImage = imageCaptcha.getImageChallenge();
@@ -31,6 +31,9 @@ public class Main {
                 ImageIO.write(bufferedImage, "jpg", outputfile);
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+            if (i % 5000 == 0) {
+                System.out.println(i);
             }
         }
 
