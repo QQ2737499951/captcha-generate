@@ -47,7 +47,7 @@ public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
 // 字体格式
         Font[] fontsList;
 //        fontsList = new Font[]{Font.decode("STSongti-SC-Light")};
-        fontsList = new Font[]{new Font("STSong", Font.PLAIN, 1)};
+        fontsList = new Font[]{new Font("华文宋体", Font.PLAIN, 1)};
         //可以使用中文验证码，另外汉字宽度比较大，要重新调整一下字体大小,不然会出现异常
 // 字体随机生成
         FontGenerator fontGenerator = new RandomFontGenerator(MIN_FONT_SIZE, MAX_FONT_SIZE, fontsList);
