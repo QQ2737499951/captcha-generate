@@ -28,3 +28,4 @@ hs_err_pid*
 captcha-generate.iml
 src/test/
 target/generated-sources/
+images/
