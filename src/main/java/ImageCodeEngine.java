@@ -12,6 +12,7 @@ import com.octo.captcha.component.image.textpaster.textdecorator.BaffleTextDecor
 import com.octo.captcha.component.image.textpaster.textdecorator.LineTextDecorator;
 import com.octo.captcha.component.image.textpaster.textdecorator.TextDecorator;
 import com.octo.captcha.component.image.wordtoimage.ComposedWordToImage;
+import com.octo.captcha.component.image.wordtoimage.DeformedComposedWordToImage;
 import com.octo.captcha.component.image.wordtoimage.WordToImage;
 import com.octo.captcha.component.word.wordgenerator.RandomWordGenerator;
 import com.octo.captcha.component.word.wordgenerator.WordGenerator;
@@ -29,6 +30,7 @@ import java.awt.image.ImageFilter;
  */
 public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
     private static final String CODE = "五丈花桥寻虽十文结万荒堂玉窗呜未年从顾雀扉国奇嶙京有军亡鸣生乌百死报入工草立黄士一刀相夜谢巷燕夕家晓期意用顽时阳斜雪空丹穿上野前山汉装尽交白人力虫耻边提出岂天衣华能位峋夹南尔姓旧来滨子王史户错功中共光常无归气口夫三飞芒片朱千金名秦册楚呼大独到心八";
+//private static final String CODE ="斜阳飞岂";
     // 字符显示的个数
     private static final Integer MIN_WORD_LEN = 4;
     // 字符显示的个数
@@ -55,8 +57,8 @@ public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
 // 验证码的颜色-使用随机颜色器new Integer[]{0,100},new Integer[]{0,100}, new
 // Integer[]{0,100}
         RandomRangeColorGenerator cgen = new RandomRangeColorGenerator(
-                new int[]{0, 150}, new int[]{0, 150},
-                new int[]{0, 150});
+                new int[]{0, 120}, new int[]{0, 120},
+                new int[]{0, 120});
         backgroundGenerator = new FunkyBackgroundGenerator(IMAGE_WIDTH, IMAGE_HEIGHT);
         //文字干扰器--- 可以创建多个
         //气泡干扰
@@ -66,15 +68,15 @@ public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
         TextPaster textPaster = new DecoratedRandomTextPaster(MIN_WORD_LEN, MAX_WORD_LEN, new RandomRangeColorGenerator(new int[]{0, 0}, new int[]{0, 0}, new int[]{0, 0}), true, new TextDecorator[]{baffleTextDecorator, lineTextDecorator});
 
 
-//过滤器
+//过滤器,波浪实现类
         WaterFilter water = new WaterFilter();
         //振幅
-        water.setAmplitude(4d);
+//        water.setAmplitude(3d);
         //显示字会出现锯齿状,true就是平滑的
-        water.setAntialias(true);
+//        water.setAntialias(true);
         //月亮的盈亏
-        //water.setPhase(30d);
-        water.setWavelength(60d);
+//        water.setPhase(30d);
+//        water.setWavelength(80d);
 
         ImageDeformation backDef = new ImageDeformationByFilters(
                 new ImageFilter[]{});
@@ -85,6 +87,8 @@ public class ImageCodeEngine extends SimpleListImageCaptchaEngine {
         // 生成图片输出
         WordToImage wordToImage = new ComposedWordToImage(fontGenerator,
                 backgroundGenerator, textPaster);
+//        wordToImage=new DeformedComposedWordToImage(fontGenerator, backgroundGenerator, textPaster, backDef, textDef,
+//                postDef);
         addFactory(new GimpyFactory(wordGenerator, wordToImage));
     }
 }
